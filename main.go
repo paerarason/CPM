@@ -4,6 +4,10 @@ import (
 	"net/http"
 )
 
+type CostMatrix struct {
+	Matrix [][]int `json:"matrix"`
+}
+
 func main() {
 	r := gin.Default()
 
@@ -16,8 +20,19 @@ func main() {
 			return
 		}
 		// Now 'network' contains the deserialized data.
-		graph:=network.Serilaize()
+		//graph:=network.Serilaize()
 		c.JSON(http.StatusOK, network)
+	})
+
+	// Endpoint for Transpotation Problem 
+	r.POST("/transpotation",func(c *gin.Context) {
+		var matrix CostMatrix
+		 if err := c.ShouldBindJSON(&matrix); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+        result,err:=Assignment(matrix.Matrix)
+		c.JSON(http.StatusOK,result)
 	})
 
 	r.Run(":8081") 
