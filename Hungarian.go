@@ -1,5 +1,26 @@
 package main
-import "math"
+import (
+	"math"
+	"encoding/json"
+)
+
+type JSONData struct {
+    Data [][]string `json:"data"`
+}
+/*
+jsonStr := `{"data": [["row1col1", "row1col2"], ["row2col1", "row2col2"]]}`
+
+var jsonData JSONData
+
+err := json.Unmarshal([]byte(jsonStr), &jsonData)
+if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+twoDArray := jsonData.Data
+fmt.Println(twoDArray)
+*/
+
 func Assignment(matrix CostMatrix.Matrix) int,error {
 	mat:=makeSquareMatrix(&matrix)
 	
@@ -22,12 +43,8 @@ func Assignment(matrix CostMatrix.Matrix) int,error {
     //Assignment
 	
 
-
-
-
-
-
 }
+
 
 //find min in the array 
 func findMinRow(arr []int) int {
@@ -40,13 +57,3 @@ func findMinRow(arr []int) int {
    return min
 }
 
-//stopped
-func makeSquareMatrix(matrix *[][]int) *[][]int{
-     for _,i:=range len(matrix){
-		for _,j:=range len(matrix[i]){
-			if len(matrix)==len(matrix[i]){
-                
-			}
-		}
-	 }   
-}
