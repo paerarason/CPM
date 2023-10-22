@@ -40,6 +40,8 @@ func Assignment(matrix CostMatrix.Matrix) int,error {
 		}
 	}
     //Assignment
+	MakeZeroLines(mat)
+	
 	
 
 }
