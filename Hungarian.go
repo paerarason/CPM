@@ -41,10 +41,9 @@ func Assignment(matrix CostMatrix.Matrix) int,error {
 	}
     //Assignment
 	MakeZeroLines(mat)
-	
-	
-
 }
+
+
 
 
 //find min in the array 
