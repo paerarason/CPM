@@ -1,63 +1,43 @@
+
 package main
-import (
-"log"
-)
 
-type Activity struct{
-	Name  string   `json:"name"`
-	Previous [] string `json:previous`
-	Time float32 `json:"time"`
-   }
+import "fmt"
 
-type Network struct{
-	Activity []Activity  `json:"Activity"`
-   }
-
-type Graph struct {
-      vertex [] *Vertex
-   }
-
-type Vertex struct {
-   name string 
-   timeTaken float32
-	adjacent  []*Vertex
-   earlyStart float32
-   earlyFinish float32
-   } 
-
-//A kind of serialisation of the  Network struct to Graph Struct for study 
-func (Net *Network) Serilaize() (string,float32){
-      g:=&Graph{}
-      vertices:=make(map[string]*Vertex)
-      
-      //Iterate Over the Actiivity 
-      for _,r:=range Net.Activity {
-            vert:=VertexFactory(r.Name,r.Time)
-            append(g.vertex,&vert)
-            vertices[r.Name]=vert
-         }
-      
-      
-      //ITERATE OVER THE VERTEX AND ADD ADJACENT 
-      for _,act:= range Net.Activity{
-         for _,pre:=range act.Previous{
-            log.Println(pre," ")
-            vert1:=vertices[act.Name]
-            append(vert1.adjacent,vertices[pre])
-            }
-         }
-      
-      //path finder  Algorithm 
-      
-      //return  path and  TimeTaken 
-      }
-
-// Create Activity
-func VertexFactory(name string,Times float32) *Vertex{
-   return &Vertex{
-      name:name,
-      timeTaken:Times}
+type Activity struct {
+Name       string
+Duration   int
+Predecessors []*Activity
+Successors   []*Activity
+// You can include other fields as needed.
 }
+
+
+func main() {
+// Create activities
+A := &Activity{Name: "A", Duration: 3}
+B := &Activity{Name: "B", Duration: 4}
+C := &Activity{Name: "C", Duration: 2}
+D := &Activity{Name: "D", Duration: 5}
+E := &Activity{Name: "E", Duration: 2}
+
+// Define dependencies
+B.Predecessors = append(B.Predecessors, A)
+C.Predecessors = append(C.Predecessors, A)
+D.Predecessors = append(D.Predecessors, B, C)
+E.Predecessors = append(E.Predecessors, D)
+
+// Update successors
+A.Successors = append(A.Successors, B, C)
+B.Successors = append(B.Successors, D)
+C.Successors = append(C.Successors, D)
+D.Successors = append(D.Successors, E)
+
+// Now you have a CPM graph where each activity can have multiple predecessors and successors.
+
+fmt.Printf("Activity A Predecessors: %v, Successors: %v\n", A.Predecessors, A.Successors)
+fmt.Printf("Activity D Predecessors: %v, Successors: %v\n", D.Predecessors, D.Successors)
+}
+
 
 /*{
 		
