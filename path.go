@@ -9,6 +9,10 @@ Successors   []*Activity
 }
 
 
+
+
+
+
 //place predecessors to the particular task 
 func (task *Activity) AddPredecessor(pre *Activity){
      append(task.Predecessors,pre)

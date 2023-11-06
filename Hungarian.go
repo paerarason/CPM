@@ -96,3 +96,8 @@ func makeSquareMatrix(matrix [][] byte) [][]byte{
 	       }	
 	  return matrix
 }
+
+func MakeZeroLines(mat [][] int ){
+    
+	
+}
